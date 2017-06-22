@@ -158,10 +158,14 @@ export default {
       });
     },
     removeAddress(coin, address) {
-      console.log(this.addresses[coin]);
       this.addresses[coin] = _.pull(this.addresses[coin], address);
-      console.log(this.addresses[coin]);
-      // TODO missing updating the prop in the view
+      localforage.setItem(`addresses_${coin}`, this.addresses[coin]).then(() => {
+        // TODO review this thing so that we don't need to retreive the
+        // content from local persitance only to update the array prop in the view
+        localforage.getItem(`addresses_${coin}`).then((newAddressArr) => {
+          this.addresses[coin] = newAddressArr;
+        });
+      });
     },
   },
   created() {
