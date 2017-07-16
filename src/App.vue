@@ -1,53 +1,12 @@
 <template>
   <v-app id="app">
-    <v-navigation-drawer persistent light v-model="drawer">
-      <v-list class="pa-0">
-        <v-list-item>
-          <v-list-tile avatar tag="div">
-            <v-list-tile-avatar>
-              <img src="https://randomuser.me/api/portraits/men/85.jpg" />
-            </v-list-tile-avatar>
-            <v-list-tile-content>
-              <v-list-tile-title>John Leider</v-list-tile-title>
-            </v-list-tile-content>
-            <v-list-tile-action>
-              <v-btn icon @click.native.stop="drawer = !drawer">
-                <icon name="chevron-left"></icon>
-              </v-btn>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list-item>
-      </v-list>
-      <v-list class="pt-0" dense>
-        <v-divider></v-divider>
-        <v-list-item>
-          <v-list-tile router to="/">
-            <v-list-tile-action>
-              <icon name="home"></icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>Home</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list-item>
-        <v-list-item>
-          <v-list-tile router to="/address-book">
-            <v-list-tile-action>
-              <icon name="list"></icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>Address book</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+      <v-navigation-drawer persistent light v-model="drawer">
+    <nav-drawer v-on:toggleNavDrawer="toggleDrawer"></nav-drawer>
+      </v-navigation-drawer>
     <v-toolbar fixed class="indigo darken-4" light>
       <v-btn icon @click.native.stop="drawer = !drawer">
         <icon name="navicon" color="#fff"></icon>
       </v-btn>
-
-      <!-- <v-toolbar-side-icon light @click.native.stop="drawer = !drawer"></v-toolbar-side-icon> -->
       <v-toolbar-title>Toolbar</v-toolbar-title>
     </v-toolbar>
     <main>
@@ -59,12 +18,22 @@
 </template>
 
 <script>
+import NavDrawer from './components/NavDrawer';
+
 export default {
   name: 'app',
   data() {
     return {
       drawer: true,
     };
+  },
+  components: {
+    'nav-drawer': NavDrawer,
+  },
+  methods: {
+    toggleDrawer() {
+      this.drawer = !this.drawer;
+    },
   },
 };
 </script>
