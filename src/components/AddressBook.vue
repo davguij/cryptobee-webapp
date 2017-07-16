@@ -6,7 +6,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="newBtcAddress">
           <v-btn icon="icon" slot="activator" class="white--text">
-            <v-icon>add_circle</v-icon>
+            <icon name="plus-circle" scale="2"></icon>
           </v-btn>
           <v-card>
             <v-card-row>
@@ -26,14 +26,14 @@
         </v-dialog>
       </v-card-title>
       <v-list v-if="addresses.btc && addresses.btc.length > 0">
-        <v-list-item v-for="btcAddress in addresses.btc">
+        <v-list-item v-for="btcAddress in addresses.btc" :key="btcAddress">
           <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>{{btcAddress}}</v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn icon @click.native="removeAddress('btc', btcAddress)">
-                <v-icon>remove_circle</v-icon>
+                <icon name="minus-circle"></icon>
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>
@@ -47,7 +47,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="newLtcAddress">
           <v-btn icon="icon" slot="activator" class="white--text">
-            <v-icon>add_circle</v-icon>
+            <icon name="plus-circle" scale="2"></icon>
           </v-btn>
           <v-card>
             <v-card-row>
@@ -67,14 +67,14 @@
         </v-dialog>
       </v-card-title>
       <v-list v-if="addresses.ltc && addresses.ltc.length > 0">
-        <v-list-item v-for="ltcAddress in addresses.ltc">
+        <v-list-item v-for="ltcAddress in addresses.ltc" :key="ltcAddress">
           <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>{{ltcAddress}}</v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn icon>
-                <v-icon>remove_circle</v-icon>
+                <icon name="minus-circle"></icon>
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>
@@ -89,7 +89,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="newEthAddress">
           <v-btn icon="icon" slot="activator" class="white--text">
-            <v-icon>add_circle</v-icon>
+            <icon name="plus-circle" scale="2"></icon>
           </v-btn>
           <v-card>
             <v-card-row>
@@ -109,14 +109,14 @@
         </v-dialog>
       </v-card-title>
       <v-list v-if="addresses.eth && addresses.eth.length > 0">
-        <v-list-item v-for="ethAddress in addresses.eth">
+        <v-list-item v-for="ethAddress in addresses.eth" :key="ethAddress">
           <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>{{ethAddress}}</v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn icon>
-                <v-icon>remove_circle</v-icon>
+                <icon name="minus-circle"></icon>
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>

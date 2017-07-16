@@ -12,7 +12,7 @@
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn icon @click.native.stop="drawer = !drawer">
-                <v-icon>chevron_left</v-icon>
+                <icon name="chevron-left"></icon>
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>
@@ -23,7 +23,7 @@
         <v-list-item>
           <v-list-tile router to="/">
             <v-list-tile-action>
-              <v-icon>dashboard</v-icon>
+              <icon name="home"></icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>Home</v-list-tile-title>
@@ -33,7 +33,7 @@
         <v-list-item>
           <v-list-tile router to="/address-book">
             <v-list-tile-action>
-              <v-icon>question_answer</v-icon>
+              <icon name="list"></icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>Address book</v-list-tile-title>
@@ -43,7 +43,11 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar fixed class="indigo darken-4" light>
-      <v-toolbar-side-icon light @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-btn icon @click.native.stop="drawer = !drawer">
+        <icon name="navicon" color="#fff"></icon>
+      </v-btn>
+
+      <!-- <v-toolbar-side-icon light @click.native.stop="drawer = !drawer"></v-toolbar-side-icon> -->
       <v-toolbar-title>Toolbar</v-toolbar-title>
     </v-toolbar>
     <main>
