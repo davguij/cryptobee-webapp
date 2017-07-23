@@ -17,6 +17,7 @@
 
 <script>
 import localforage from 'localforage';
+import axios from 'axios';
 
 export default {
   name: 'coin-detail',
@@ -28,6 +29,12 @@ export default {
     };
   },
   created() {
+    axios.get(`http://localhost:8888/rates/${this.coin}`).then((response) => {
+      const allRates = response.data;
+      const applicableRate = allRates.find(val => val.currency === 'USD');
+      console.log(applicableRate);
+      this.rate = applicableRate.rate;
+    });
     localforage.getItem(`addresses_${this.coin}`).then((addresses) => {
       if (addresses !== null) {
         console.log(addresses);
