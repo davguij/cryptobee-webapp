@@ -1,18 +1,20 @@
 <template>
-  <v-card>
-    <v-card-title>
-      {{coin.toUpperCase()}}
-    </v-card-title>
-    <v-card-text>
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        {{coin.toUpperCase()}}  
+      </p>
+    </header>
+    <div class="card-content">
       <p>
-        <strong>Total balance:</strong>
+        <strong><small>Balance:</small></strong>
         <br>{{balance}} {{coin.toUpperCase()}}
         <br>{{balance * rate}}</p>
       <p>
-        <strong>Exchange rate:</strong>
+        <strong><small>Exchange rate:</small></strong>
         <br>{{rate}}</p>
-    </v-card-text>
-  </v-card>
+    </div>
+  </div>
 </template>
 
 <script>

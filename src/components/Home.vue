@@ -1,28 +1,33 @@
 <template>
-  <div>
-    <v-layout wrap>
-      <v-flex xs12 sm6>
-        <v-card>
-          <v-card-title>
-            Your balance:
-          </v-card-title>
-          <v-card-text>
-             <p class="display-4">{{globalBalance}}</p> 
-            <!-- {{globalBalance}} -->
-          </v-card-text>
-        </v-card>
-      </v-flex>
-      <v-flex xs4 sm2>
+  <section class="section">
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              Your global balance:
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <p class="title">
+                {{globalBalance}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
         <coin-detail coin="btc" v-on:newbalance="updateGlobalBalance('btc', $event)"></coin-detail>
-      </v-flex>
-      <v-flex xs4 sm2>
+      </div>
+      <div class="column">
         <coin-detail coin="ltc" v-on:newbalance="updateGlobalBalance('ltc', $event)"></coin-detail>
-      </v-flex>
-      <v-flex xs4 sm2>
+      </div>
+      <div class="column">
         <coin-detail coin="eth" v-on:newbalance="updateGlobalBalance('eth', $event)"></coin-detail>
-      </v-flex>
-    </v-layout>
-  </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>

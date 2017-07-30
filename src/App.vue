@@ -1,41 +1,42 @@
 <template>
-  <v-app id="app">
-      <v-navigation-drawer persistent light v-model="drawer">
-    <nav-drawer v-on:toggleNavDrawer="toggleDrawer"></nav-drawer>
-      </v-navigation-drawer>
-    <v-toolbar fixed class="indigo darken-4" light>
-      <v-btn icon @click.native.stop="drawer = !drawer">
-        <icon name="navicon" color="#fff"></icon>
-      </v-btn>
-      <v-toolbar-title>Toolbar</v-toolbar-title>
-    </v-toolbar>
-    <main>
-      <v-container fluid>
-        <router-view></router-view>
-      </v-container>
-    </main>
-  </v-app>
+  <div>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="http://bulma.io">
+          <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+        </a>
+  
+        <div class="navbar-burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+          <router-link class="navbar-item" to="/">Dashboard</router-link>  
+          <router-link class="navbar-item" to="/address-book">Address book</router-link>  
+          </a>
+        </div>
+      </div>
+    </nav>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import NavDrawer from './components/NavDrawer';
-
 export default {
   name: 'app',
   data() {
-    return {
-      drawer: true,
-    };
+    return {};
   },
   components: {
-    'nav-drawer': NavDrawer,
   },
   methods: {
-    toggleDrawer() {
-      this.drawer = !this.drawer;
-    },
   },
 };
 </script>
 
-<style src="vuetify/dist/vuetify.min.css"></style>
+<style></style>
