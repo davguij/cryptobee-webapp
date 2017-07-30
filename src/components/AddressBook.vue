@@ -165,6 +165,8 @@ export default {
           this.newLtcAddress = false;
           this.newEthAddress = false;
         });
+      } else {
+        alert('invalid address!');
       }
     },
     removeAddress(coin, address) {
