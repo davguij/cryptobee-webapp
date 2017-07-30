@@ -7,7 +7,7 @@
       <p>
         <strong>Total balance:</strong>
         <br>{{balance}} {{coin.toUpperCase()}}
-        <br>{{balance / rate}}</p>
+        <br>{{balance * rate}}</p>
       <p>
         <strong>Exchange rate:</strong>
         <br>{{rate}}</p>
@@ -32,12 +32,16 @@ export default {
     axios.get(`http://localhost:8888/rates/${this.coin}`).then((response) => {
       const allRates = response.data;
       const applicableRate = allRates.find(val => val.currency === 'USD');
-      console.log(applicableRate);
       this.rate = applicableRate.rate;
     });
     localforage.getItem(`addresses_${this.coin}`).then((addresses) => {
       if (addresses !== null) {
-        console.log(addresses);
+        // console.log(addresses);
+        // let's grab those balances!
+        axios.post(`http://localhost:8888/balance/${this.coin}`, { addresses }).then((response) => {
+          this.balance = response.data.totalBalance;
+          this.$emit('newbalance', this.balance * this.rate);
+        });
       }
     });
   },

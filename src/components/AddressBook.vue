@@ -131,6 +131,8 @@
 <script>
 import localforage from 'localforage';
 import _ from 'lodash';
+import * as addressValidator from 'wallet-address-validator';
+import ethAddrValidator from '../utils/ethAddrValidator';
 
 export default {
   name: 'address-book',
@@ -149,13 +151,21 @@ export default {
   },
   methods: {
     addAddress(coin) {
-      this.addresses[coin].push(this.wallet);
-      this.wallet = '';
-      localforage.setItem(`addresses_${coin}`, this.addresses[coin]).then(() => {
-        this.newBtcAddress = false;
-        this.newLtcAddress = false;
-        this.newEthAddress = false;
-      });
+      let valid;
+      if (coin !== 'eth') {
+        valid = addressValidator.validate(this.wallet, coin);
+      } else {
+        valid = ethAddrValidator.isAddress(this.wallet);
+      }
+      if (valid) {
+        this.addresses[coin].push(this.wallet);
+        this.wallet = '';
+        localforage.setItem(`addresses_${coin}`, this.addresses[coin]).then(() => {
+          this.newBtcAddress = false;
+          this.newLtcAddress = false;
+          this.newEthAddress = false;
+        });
+      }
     },
     removeAddress(coin, address) {
       this.addresses[coin] = _.pull(this.addresses[coin], address);

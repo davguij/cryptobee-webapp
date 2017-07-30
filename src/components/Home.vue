@@ -7,25 +7,21 @@
             Your balance:
           </v-card-title>
           <v-card-text>
-            <p class="display-4">$12,234</p>
+            <!-- <p class="display-4">{{globalBalance}}</p> -->
+            {{globalBalance}}
           </v-card-text>
         </v-card>
       </v-flex>
       <v-flex xs4 sm2>
-        <coin-detail coin="btc"></coin-detail>
+        <coin-detail coin="btc" v-on:newbalance="updateGlobalBalance('btc', $event)"></coin-detail>
       </v-flex>
       <v-flex xs4 sm2>
-        <coin-detail coin="ltc"></coin-detail>
+        <coin-detail coin="ltc" v-on:newbalance="updateGlobalBalance('ltc', $event)"></coin-detail>
       </v-flex>
       <v-flex xs4 sm2>
-        <coin-detail coin="eth"></coin-detail>
+        <coin-detail coin="eth" v-on:newbalance="updateGlobalBalance('eth', $event)"></coin-detail>
       </v-flex>
     </v-layout>
-    <v-card>
-      <v-card-title>
-        Graph
-      </v-card-title>
-    </v-card>
   </div>
 </template>
 
@@ -36,6 +32,16 @@ export default {
   name: 'home',
   components: {
     'coin-detail': CoinDetail,
+  },
+  data() {
+    return {
+      globalBalance: 0,
+    };
+  },
+  methods: {
+    updateGlobalBalance(coin, balance) {
+      this.globalBalance += balance;
+    },
   },
 };
 </script>
