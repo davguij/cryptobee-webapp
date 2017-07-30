@@ -7,8 +7,8 @@
             Your balance:
           </v-card-title>
           <v-card-text>
-            <!-- <p class="display-4">{{globalBalance}}</p> -->
-            {{globalBalance}}
+             <p class="display-4">{{globalBalance}}</p> 
+            <!-- {{globalBalance}} -->
           </v-card-text>
         </v-card>
       </v-flex>
