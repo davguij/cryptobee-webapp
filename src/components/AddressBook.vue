@@ -23,7 +23,7 @@
           </b-field>
         </section>
         <footer class="card-footer">
-          <a class="card-footer-item">Cancel</a>
+          <a class="card-footer-item" @click="isComponentModalActive = false">Cancel</a>
           <a class="card-footer-item" @click="addWallet()">Save</a>
         </footer>
       </div>
@@ -47,9 +47,9 @@
 
 <script>
 import localforage from 'localforage';
-import _ from 'lodash';
-// import * as addressValidator from 'wallet-address-validator';
-// import ethAddrValidator from '../utils/ethAddrValidator';
+// import _ from 'lodash';
+import * as addressValidator from 'wallet-address-validator';
+import ethAddrValidator from '../utils/ethAddrValidator';
 
 export default {
   name: 'address-book',
@@ -66,19 +66,41 @@ export default {
   },
   methods: {
     addWallet() {
-      localforage.getItem(`addresses_${this.newWallet.coin}`).then((allWallets) => {
-        const wallets = allWallets === null ? [] : allWallets;
-        wallets.push(this.newWallet);
-        localforage.setItem(`addresses_${this.newWallet.coin}`, wallets).then(() => {
-          this.addresses.push(this.newWallet);
-          this.newWallet = {
-            coin: '',
-            address: '',
-            alias: '',
-          };
-          this.isComponentModalActive = false;
+      switch (this.newWallet.coin) {
+        case 'btc':
+          this.valid = addressValidator.validate(this.newWallet.address, this.newWallet.coin);
+          break;
+        case 'ltc':
+          this.valid = addressValidator.validate(this.newWallet.address, this.newWallet.coin);
+          break;
+        case 'eth':
+          this.valid = ethAddrValidator.isAddress(this.newWallet.address);
+          break;
+
+        default:
+          break;
+      }
+
+      if (this.valid) {
+        localforage.getItem(`addresses_${this.newWallet.coin}`).then((allWallets) => {
+          const wallets = allWallets === null ? [] : allWallets;
+          wallets.push(this.newWallet);
+          localforage.setItem(`addresses_${this.newWallet.coin}`, wallets).then(() => {
+            this.addresses.push(this.newWallet);
+            this.newWallet = {
+              coin: '',
+              address: '',
+              alias: '',
+            };
+            this.isComponentModalActive = false;
+          });
         });
-      });
+      } else {
+        this.$toast.open({
+          message: 'You entered non-valid data, please try again.',
+          type: 'is-danger',
+        });
+      }
     },
   },
   created() {
