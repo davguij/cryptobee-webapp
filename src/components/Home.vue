@@ -5,7 +5,7 @@
         <div class="card">
           <header class="card-header">
             <p class="card-header-title">
-              Your global balance:
+              Your global balance
             </p>
           </header>
           <div class="card-content">
