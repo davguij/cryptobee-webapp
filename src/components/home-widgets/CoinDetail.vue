@@ -38,9 +38,14 @@ export default {
     });
     localforage.getItem(`addresses_${this.coin}`).then((addresses) => {
       if (addresses !== null) {
-        // console.log(addresses);
+        console.log(addresses);
+        // the endpoint only accepts a flat array of addresses
+        const addressesArr = [];
+        addresses.forEach((address) => {
+          addressesArr.push(address.address);
+        }, this);
         // let's grab those balances!
-        axios.post(`http://localhost:8888/balance/${this.coin}`, { addresses }).then((response) => {
+        axios.post(`http://localhost:8888/balance/${this.coin}`, { addresses: addressesArr }).then((response) => {
           this.balance = response.data.totalBalance;
           this.$emit('newbalance', this.balance * this.rate);
         });
