@@ -5,6 +5,7 @@ import 'buefy/lib/buefy.css';
 import localforage from 'localforage';
 // import 'vue-awesome/icons';
 // import Icon from 'vue-awesome/components/Icon';
+import Vue2Filters from 'vue2-filters';
 
 // import './assets/fonts/fonts.css';
 import App from './App';
@@ -19,6 +20,7 @@ Vue.use(Buefy, {
   defaultIconPack: 'fa',
 });
 // Vue.component('icon', Icon);
+Vue.use(Vue2Filters);
 
 /* eslint-disable no-new */
 new Vue({

@@ -10,13 +10,13 @@
         <strong>
           <small>Balance:</small>
         </strong>
-        <br>{{balance}} {{coin.toUpperCase()}}
-        <br>{{balanceInCurrency}}</p>
+        <br>{{balanceFormatted}} {{coin.toUpperCase()}}
+        <br>{{balanceInCurrency | currency}}</p>
       <p>
         <strong>
           <small>Exchange rate:</small>
         </strong>
-        <br>{{rate}}</p>
+        <br>{{rate | currency}}</p>
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@
 <script>
 import localforage from 'localforage';
 import axios from 'axios';
+import numeral from 'numeral';
 
 export default {
   name: 'coin-detail',
@@ -38,6 +39,9 @@ export default {
     balanceInCurrency() {
       this.$emit('newbalance', this.balance * this.rate);
       return this.balance * this.rate;
+    },
+    balanceFormatted() {
+      return numeral(this.balance).format('0,0.000000');
     },
   },
   created() {

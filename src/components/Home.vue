@@ -11,7 +11,7 @@
           <div class="card-content">
             <div class="content">
               <p class="title">
-                {{globalBalance}}
+                {{globalBalance | currency}}
               </p>
             </div>
           </div>
