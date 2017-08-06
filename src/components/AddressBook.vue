@@ -110,7 +110,10 @@ export default {
               alias: '',
             };
             this.isComponentModalActive = false;
-            this.$toast.open('Wallet added!');
+            this.$toast.open({
+              type: 'is.info',
+              message: 'Wallet added!',
+            });
           });
         });
       } else {
@@ -134,7 +137,10 @@ export default {
               // eslint-disable-next-line max-len
               const newAddresses = this.addresses.filter(address => address.address !== this.selectedTableRow.address);
               this.addresses = newAddresses;
-              this.$toast.open('Wallet deleted!');
+              this.$toast.open({
+                type: 'is.info',
+                message: 'Wallet removed!',
+              });
             });
           });
         },
