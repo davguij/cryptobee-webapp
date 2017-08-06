@@ -2,16 +2,20 @@
   <div class="card">
     <header class="card-header">
       <p class="card-header-title">
-        {{coin.toUpperCase()}}  
+        {{coin.toUpperCase()}}
       </p>
     </header>
     <div class="card-content">
       <p>
-        <strong><small>Balance:</small></strong>
+        <strong>
+          <small>Balance:</small>
+        </strong>
         <br>{{balance}} {{coin.toUpperCase()}}
-        <br>{{balance * rate}}</p>
+        <br>{{balanceInCurrency}}</p>
       <p>
-        <strong><small>Exchange rate:</small></strong>
+        <strong>
+          <small>Exchange rate:</small>
+        </strong>
         <br>{{rate}}</p>
     </div>
   </div>
@@ -30,6 +34,12 @@ export default {
       rate: 0,
     };
   },
+  computed: {
+    balanceInCurrency() {
+      this.$emit('newbalance', this.balance * this.rate);
+      return this.balance * this.rate;
+    },
+  },
   created() {
     axios.get(`http://localhost:8888/rates/${this.coin}`).then((response) => {
       const allRates = response.data;
@@ -46,7 +56,6 @@ export default {
         // let's grab those balances!
         axios.post(`http://localhost:8888/balance/${this.coin}`, { addresses: addressesArr }).then((response) => {
           this.balance = response.data.totalBalance;
-          this.$emit('newbalance', this.balance * this.rate);
         });
       }
     });
