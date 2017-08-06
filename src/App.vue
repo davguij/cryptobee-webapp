@@ -3,7 +3,7 @@
     <nav class="navbar">
       <div class="navbar-brand">
         <a class="navbar-item" href="http://bulma.io">
-          <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+          <img src="./assets/cryptobee-logo.jpg" class="nav-logo" alt="Bulma: a modern CSS framework based on Flexbox">
         </a>
   
         <div class="navbar-burger">
@@ -39,4 +39,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+  img.nav-logo {
+    max-height: 3.5rem;
+    margin-bottom: -0.65rem;
+  }
+</style>
