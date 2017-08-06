@@ -38,7 +38,6 @@ export default {
     });
     localforage.getItem(`addresses_${this.coin}`).then((addresses) => {
       if (addresses !== null) {
-        console.log(addresses);
         // the endpoint only accepts a flat array of addresses
         const addressesArr = [];
         addresses.forEach((address) => {

@@ -32,7 +32,7 @@
     <b-table :data="addresses">
       <template scope="props">
         <b-table-column field="coin" label="Coin">
-          {{ props.row.coin }}
+          {{ props.row.coin | coinFormatter}}
         </b-table-column>
         <b-table-column field="alias" label="Alias">
           {{ props.row.alias }}
@@ -63,6 +63,16 @@ export default {
         alias: '',
       },
     };
+  },
+  filters: {
+    coinFormatter(coinCode) {
+      const coinCodes = new Map();
+      coinCodes.set('btc', 'Bitcoin');
+      coinCodes.set('ltc', 'Litecoin');
+      coinCodes.set('eth', 'Ethereum');
+
+      return coinCodes.get(coinCode);
+    },
   },
   methods: {
     addWallet() {
