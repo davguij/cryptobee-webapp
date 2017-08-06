@@ -1,6 +1,7 @@
 <template>
   <section class="section">
     <button class="button" @click="isComponentModalActive = true">Add wallet</button>
+    <button class="button" @click="removeWallet()" :disabled="deleteButtonDisabled">Remove wallet</button>
   
     <b-modal :active.sync="isComponentModalActive" has-modal-card>
       <div class="card">
@@ -29,7 +30,7 @@
       </div>
     </b-modal>
   
-    <b-table :data="addresses">
+    <b-table :data="addresses" :selected.sync="selectedTableRow">
       <template scope="props">
         <b-table-column field="coin" label="Coin">
           {{ props.row.coin | coinFormatter}}
@@ -47,7 +48,7 @@
 
 <script>
 import localforage from 'localforage';
-// import _ from 'lodash';
+import _ from 'lodash';
 import * as addressValidator from 'wallet-address-validator';
 import ethAddrValidator from '../utils/ethAddrValidator';
 
@@ -62,7 +63,13 @@ export default {
         address: '',
         alias: '',
       },
+      selectedTableRow: {},
     };
+  },
+  computed: {
+    deleteButtonDisabled() {
+      return _.isEmpty(this.selectedTableRow);
+    },
   },
   filters: {
     coinFormatter(coinCode) {
@@ -103,6 +110,7 @@ export default {
               alias: '',
             };
             this.isComponentModalActive = false;
+            this.$toast.open('Wallet added!');
           });
         });
       } else {
@@ -111,6 +119,26 @@ export default {
           type: 'is-danger',
         });
       }
+    },
+    removeWallet() {
+      this.$dialog.confirm({
+        message: 'Are you sure you want to <strong>remove</strong> the selected wallet from the Address Book? This action cannot be undone.',
+        confirmText: 'Remove wallet',
+        type: 'is-danger',
+        onConfirm: () => {
+          localforage.getItem(`addresses_${this.selectedTableRow.coin}`).then((allWallets) => {
+            // need to find the one we're trying to delete!
+            // eslint-disable-next-line max-len
+            const newWalletArr = allWallets.filter(wallet => wallet.address !== this.selectedTableRow.address);
+            localforage.setItem(`addresses_${this.selectedTableRow.coin}`, newWalletArr).then(() => {
+              // eslint-disable-next-line max-len
+              const newAddresses = this.addresses.filter(address => address.address !== this.selectedTableRow.address);
+              this.addresses = newAddresses;
+              this.$toast.open('Wallet deleted!');
+            });
+          });
+        },
+      });
     },
   },
   created() {
