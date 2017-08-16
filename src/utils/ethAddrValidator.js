@@ -1,5 +1,5 @@
 /* eslint-disable */
-
+const sha3 = require("crypto-js/sha3");
 /**
   * Checks if the given string is a checksummed address
   *
