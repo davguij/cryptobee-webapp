@@ -58,9 +58,11 @@ export default {
           addressesArr.push(address.address);
         }, this);
         // let's grab those balances!
-        axios.post(`http://localhost:8888/balance/${this.coin}`, { addresses: addressesArr }).then((response) => {
-          this.balance = response.data.totalBalance;
-        });
+        if (addressesArr.length > 0) {
+          axios.post(`http://localhost:8888/balance/${this.coin}`, { addresses: addressesArr }).then((response) => {
+            this.balance = response.data.totalBalance;
+          });
+        }
       }
     });
   },

@@ -14,6 +14,8 @@
               <option value="btc">Bitcoin</option>
               <option value="ltc">Litecoin</option>
               <option value="eth">Ethereum</option>
+              <option value="doge">Dogecoin</option>
+              <option value="dash">Dash</option>  
             </b-select>
           </b-field>
           <b-field>
@@ -77,6 +79,8 @@ export default {
       coinCodes.set('btc', 'Bitcoin');
       coinCodes.set('ltc', 'Litecoin');
       coinCodes.set('eth', 'Ethereum');
+      coinCodes.set('doge', 'Dogecoin');
+      coinCodes.set('dash', 'Dash');
 
       return coinCodes.get(coinCode);
     },
@@ -95,6 +99,8 @@ export default {
           break;
 
         default:
+          // TODO missing validation for Dogecoin and Dash
+          this.valid = true;
           break;
       }
 
@@ -166,6 +172,20 @@ export default {
         if (ethAddresses !== null) {
           ethAddresses.forEach((ethAddress) => {
             this.addresses.push(ethAddress);
+          }, this);
+        }
+      });
+      localforage.getItem('addresses_doge').then((dogeAddresses) => {
+        if (dogeAddresses !== null) {
+          dogeAddresses.forEach((dogeAddress) => {
+            this.addresses.push(dogeAddress);
+          }, this);
+        }
+      });
+      localforage.getItem('addresses_dash').then((dashAddresses) => {
+        if (dashAddresses !== null) {
+          dashAddresses.forEach((dashAddress) => {
+            this.addresses.push(dashAddress);
           }, this);
         }
       });
