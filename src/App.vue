@@ -1,5 +1,6 @@
 <template>
   <div class="site">
+    <loading></loading>
     <nav class="navbar">
       <div class="navbar-brand">
         <div class="navbar-item">
@@ -32,12 +33,15 @@
 </template>
 
 <script>
+import Loading from './components/Loading';
+
 export default {
   name: 'app',
   data() {
     return {};
   },
   components: {
+    loading: Loading,
   },
   methods: {
   },

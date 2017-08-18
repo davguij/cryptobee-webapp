@@ -26,6 +26,8 @@ import localforage from 'localforage';
 import axios from 'axios';
 import numeral from 'numeral';
 
+import EventBus from '../../event-bus';
+
 export default {
   name: 'coin-detail',
   props: ['coin'],
@@ -45,6 +47,7 @@ export default {
     },
   },
   created() {
+    EventBus.$emit('LOADING', true);
     axios.get(`http://localhost:8888/rates/${this.coin}`).then((response) => {
       const allRates = response.data;
       const applicableRate = allRates.find(val => val.currency === 'USD');
@@ -59,8 +62,10 @@ export default {
         }, this);
         // let's grab those balances!
         if (addressesArr.length > 0) {
+          EventBus.$emit('LOADING', true);
           axios.post(`http://localhost:8888/balance/${this.coin}`, { addresses: addressesArr }).then((response) => {
             this.balance = response.data.totalBalance;
+            EventBus.$emit('LOADING', false);
           });
         }
       }
