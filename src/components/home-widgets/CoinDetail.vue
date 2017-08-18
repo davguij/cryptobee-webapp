@@ -48,7 +48,7 @@ export default {
   },
   created() {
     EventBus.$emit('LOADING', true);
-    axios.get(`http://localhost:8888/rates/${this.coin}`).then((response) => {
+    axios.get(`https://cryptobee-api.herokuapp.com/rates/${this.coin}`).then((response) => {
       const allRates = response.data;
       const applicableRate = allRates.find(val => val.currency === 'USD');
       this.rate = applicableRate.rate;
@@ -65,7 +65,7 @@ export default {
         // let's grab those balances!
         if (addressesArr.length > 0) {
           EventBus.$emit('LOADING', true);
-          axios.post(`http://localhost:8888/balance/${this.coin}`, { addresses: addressesArr }).then((response) => {
+          axios.post(`https://cryptobee-api.herokuapp.com/balance/${this.coin}`, { addresses: addressesArr }).then((response) => {
             this.balance = response.data.totalBalance;
             EventBus.$emit('LOADING', false);
           }).catch((error) => {
