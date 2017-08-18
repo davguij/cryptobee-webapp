@@ -20,6 +20,7 @@
       </div>
     </nav>
     <router-view class="main"></router-view>
+    <error></error>
     <footer class="footer">
       <div class="container">
         <div class="content has-text-centered">
@@ -34,6 +35,7 @@
 
 <script>
 import Loading from './components/Loading';
+import Error from './components/Error';
 
 export default {
   name: 'app',
@@ -42,6 +44,7 @@ export default {
   },
   components: {
     loading: Loading,
+    error: Error,
   },
   methods: {
   },

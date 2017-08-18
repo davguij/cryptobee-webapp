@@ -52,6 +52,8 @@ export default {
       const allRates = response.data;
       const applicableRate = allRates.find(val => val.currency === 'USD');
       this.rate = applicableRate.rate;
+    }).catch((error) => {
+      EventBus.$emit('ERROR', error);
     });
     localforage.getItem(`addresses_${this.coin}`).then((addresses) => {
       if (addresses !== null) {
@@ -66,6 +68,8 @@ export default {
           axios.post(`http://localhost:8888/balance/${this.coin}`, { addresses: addressesArr }).then((response) => {
             this.balance = response.data.totalBalance;
             EventBus.$emit('LOADING', false);
+          }).catch((error) => {
+            EventBus.$emit('ERROR', error.message);
           });
         }
       }
