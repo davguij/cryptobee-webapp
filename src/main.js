@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Buefy from 'buefy';
 import 'buefy/lib/buefy.css';
+import 'font-awesome/css/font-awesome.css';
 
 import localforage from 'localforage';
 // import 'vue-awesome/icons';

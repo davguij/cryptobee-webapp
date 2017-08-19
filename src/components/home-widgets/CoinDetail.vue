@@ -53,7 +53,8 @@ export default {
       const applicableRate = allRates.find(val => val.currency === 'USD');
       this.rate = applicableRate.rate;
     }).catch((error) => {
-      EventBus.$emit('ERROR', error);
+      EventBus.$emit('ERROR', error.message);
+      EventBus.$emit('LOADING', false);
     });
     localforage.getItem(`addresses_${this.coin}`).then((addresses) => {
       if (addresses !== null) {
@@ -70,6 +71,7 @@ export default {
             EventBus.$emit('LOADING', false);
           }).catch((error) => {
             EventBus.$emit('ERROR', error.message);
+            EventBus.$emit('LOADING', false);
           });
         }
       }

@@ -7,15 +7,16 @@
           <img src="./assets/cryptobee-logo.jpg" class="nav-logo" alt="Cryptobee">
         </div>
         <router-link class="navbar-item is-hidden-desktop" to="/">Dashboard</router-link>
-        <router-link class="navbar-item is-hidden-desktop" to="/address-book">Address book</router-link>
+        <router-link class="navbar-item is-hidden-desktop" to="/wallets">Wallets</router-link>
+        <router-link class="navbar-item is-hidden-desktop" to="/about"><i class="fa fa-question-circle"></i></router-link>
       </div>
       <div class="navbar-menu">
         <div class="navbar-start">
         </div>
         <div class="navbar-end">
           <router-link class="navbar-item" to="/">Dashboard</router-link>
-          <router-link class="navbar-item" to="/address-book">Address book</router-link>
-          </a>
+          <router-link class="navbar-item" to="/wallets">Wallets</router-link>
+          <router-link class="navbar-item" to="/about"><i class="fa fa-question-circle"></i></router-link>
         </div>
       </div>
     </nav>
@@ -29,7 +30,7 @@
           </p>
         </div>
       </div>
-    </footer>  
+    </footer>
   </div>
 </template>
 
