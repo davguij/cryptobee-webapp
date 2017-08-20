@@ -1,2 +1,3 @@
 http://cryptobee.netlify.com https://cryptobee.netlify.com
-/api/*  https://cryptobee-api.herokuapp.com/:splat  200
+https://cryptobee.netlify.com/api/*  https://cryptobee-api.herokuapp.com/:splat  200
+https://cryptobee-dev.netlify.com/api/*  https://cryptobee-api-dev.herokuapp.com/:splat  200
