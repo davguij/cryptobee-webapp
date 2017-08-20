@@ -4,7 +4,7 @@
     <nav class="navbar">
       <div class="navbar-brand">
         <div class="navbar-item">
-          <img src="./assets/cryptobee-logo.jpg" class="nav-logo" alt="Cryptobee">
+          <img src="/static/img/cryptobee-logo.jpg" class="nav-logo" alt="Cryptobee">
         </div>
         <router-link class="navbar-item is-hidden-desktop" to="/">Dashboard</router-link>
         <router-link class="navbar-item is-hidden-desktop" to="/wallets">Wallets</router-link>
