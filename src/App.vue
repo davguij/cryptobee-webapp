@@ -1,54 +1,70 @@
 <template>
-  <div id="app">
-    <header>
-      <span>Vue.js PWA</span>
-    </header>
-    <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
-      <router-view></router-view>
-    </main>
+  <div class="site">
+    <loading></loading>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <div class="navbar-item">
+          <img src="/static/img/cryptobee-logo.jpg" class="nav-logo" alt="Cryptobee">
+        </div>
+        <router-link class="navbar-item is-hidden-desktop" to="/">Dashboard</router-link>
+        <router-link class="navbar-item is-hidden-desktop" to="/wallets">Wallets</router-link>
+        <router-link class="navbar-item is-hidden-desktop" to="/about"><i class="fa fa-question-circle"></i></router-link>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+          <router-link class="navbar-item" to="/">Dashboard</router-link>
+          <router-link class="navbar-item" to="/wallets">Wallets</router-link>
+          <router-link class="navbar-item" to="/about"><i class="fa fa-question-circle"></i></router-link>
+        </div>
+      </div>
+    </nav>
+    <router-view class="main"></router-view>
+    <error></error>
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            <strong>cryptobee</strong> by David Guijarro
+          </p>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script>
+import Loading from './components/Loading';
+import Error from './components/Error';
+
 export default {
   name: 'app',
+  data() {
+    return {};
+  },
+  components: {
+    loading: Loading,
+    error: Error,
+  },
+  methods: {
+  },
 };
 </script>
 
 <style>
-body {
-  margin: 0;
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+.main {
+  flex: 1;
 }
 
-main {
-  text-align: center;
-  margin-top: 40px;
-}
-
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #4fc08d;
-  color: #ffffff;
-}
-
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
+img.nav-logo {
+  max-height: 3.5rem;
+  margin-bottom: -0.65rem;
 }
 </style>
